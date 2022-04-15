@@ -11,5 +11,5 @@ class CustomPasswordValidator:
             raise ValidationError(('Пароль должен содержать хотя бы одну %(min_length)d букву.') % {'min_length': self.min_length})
 
     def get_help_text(self):
-        return "Введи корректный пароль"
+        return "Введите корректные данные"
 
