@@ -2,12 +2,12 @@ from rest_framework import generics
 
 from .permissions import IsAuthorOrReadOnly, AuthorRole
 from .models import Quote, User
-from .serializers import QuoteSerializer, UserSerializer
+from .serializers import QuoteSerializer, UserSerializer, QuoteDetailSerializer
 
 
 class QuoteCreate(generics.CreateAPIView):
     queryset = Quote.objects.all()
-    serializer_class = QuoteSerializer
+    serializer_class = QuoteDetailSerializer
     permission_classes = [AuthorRole]
 
     def perform_create(self, serializer):
@@ -21,7 +21,7 @@ class QuoteList(generics.ListAPIView):
 
 class QuoteDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Quote.objects.all()
-    serializer_class = QuoteSerializer
+    serializer_class = QuoteDetailSerializer
     permission_classes = [IsAuthorOrReadOnly]
         
 
