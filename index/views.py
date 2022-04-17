@@ -7,7 +7,7 @@ from .serializers import QuoteSerializer, UserSerializer, QuoteDetailSerializer
 
 class QuoteCreate(generics.CreateAPIView):
     queryset = Quote.objects.all()
-    serializer_class = QuoteSerializer
+    serializer_class = QuoteDetailSerializer
     permission_classes = [AuthorRole]
 
     def perform_create(self, serializer):
