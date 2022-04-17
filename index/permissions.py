@@ -17,11 +17,11 @@ class IsAuthorOrReadOnly(permissions.BasePermission):
     message = "У вас нет доступа"
 
     def sub_quote(self, obj):
-        return obj.sub_only == True     
+        return obj.sub_only   
 
     def has_object_permission(self, request, view, obj):
         if self.sub_quote(obj) and request.user.is_authenticated and request.method in permissions.SAFE_METHODS:
             return True
-        elif not self.sub_quote(obj):
+        elif not self.sub_quote(obj) and request.method in permissions.SAFE_METHODS:
             return True
         return obj.author == request.user
