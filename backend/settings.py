@@ -83,13 +83,23 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+# DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#             'NAME': 'dasgbbe2jdjn4p',
+#             'USER': 'gtvftgynweykdt',
+#             'PASSWORD':'aad8350d2fd152d4f1561f85b3d8198823f4a5b76c5904febd570d39075131bc',
+#             'HOST': 'ec2-99-80-170-190.eu-west-1.compute.amazonaws.com',
+#             'PORT': 5432,
+#         }
+#     }
 DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'dasgbbe2jdjn4p',
-            'USER': 'gtvftgynweykdt',
-            'PASSWORD':'aad8350d2fd152d4f1561f85b3d8198823f4a5b76c5904febd570d39075131bc',
-            'HOST': 'ec2-99-80-170-190.eu-west-1.compute.amazonaws.com',
+            'NAME': 'dhrtrno2e2mtj',
+            'USER': 'rsiexznfakapno',
+            'PASSWORD':'a1231932c5f670cb191f96b7e6268f0ffa9fef66430e45ef67033d7636d07a19',
+            'HOST': 'ec2-52-30-67-143.eu-west-1.compute.amazonaws.com',
             'PORT': 5432,
         }
     }
