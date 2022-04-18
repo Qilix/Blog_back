@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ao7azc(jgv71d2o8rdlx-m-9n(rdz8#il2@m4hz2tc=k#0t279'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -86,13 +86,25 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'dasgbbe2jdjn4p',
-            'USER': 'gtvftgynweykdt',
-            'PASSWORD':'aad8350d2fd152d4f1561f85b3d8198823f4a5b76c5904febd570d39075131bc',
-            'HOST': 'ec2-99-80-170-190.eu-west-1.compute.amazonaws.com',
+            'NAME': 'd7vgg9lh9jq67e',
+            'USER': 'eqajtvllegkvfi',
+            'PASSWORD':'5b6be9a987e947490d02e1e557dd565b22c6bc3740480b939c2e919d826de208',
+            'HOST': 'ec2-52-212-228-71.eu-west-1.compute.amazonaws.com',
             'PORT': 5432,
         }
     }
+
+# DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#             'NAME': 'test',
+#             'USER': 'postgres',
+#             'PASSWORD':'1224',
+#             'HOST': 'localhost',
+#             'PORT': 5432,
+#         }
+#     }
+
 
 
 # Password validation
@@ -131,7 +143,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-# STATIC_URL = 'static/'
+STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -140,6 +152,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
