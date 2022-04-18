@@ -1,27 +1,27 @@
 from rest_framework import generics
 
 from .permissions import IsAuthorOrReadOnly, AuthorRole
-from .models import Article, User
-from .serializers import ArticleSerializer, UserSerializer, ArticleDetailSerializer
+from .models import Quote, User
+from .serializers import QuoteSerializer, UserSerializer, QuoteDetailSerializer
 
 
-class ArticleCreate(generics.CreateAPIView):
-    queryset = Article.objects.all()
-    serializer_class = ArticleDetailSerializer
+class QuoteCreate(generics.CreateAPIView):
+    queryset = Quote.objects.all()
+    serializer_class = QuoteDetailSerializer
     permission_classes = [AuthorRole]
 
     def perform_create(self, serializer):
 	    serializer.save(author=self.request.user)
 
 
-class ArticleList(generics.ListAPIView):
-    queryset = Article.objects.all().order_by('-created_at')
-    serializer_class = ArticleSerializer
+class QuoteList(generics.ListAPIView):
+    queryset = Quote.objects.all().order_by('-created_at')
+    serializer_class = QuoteSerializer
 
 
-class ArticleDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Article.objects.all()
-    serializer_class = ArticleDetailSerializer
+class QuoteDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Quote.objects.all()
+    serializer_class = QuoteDetailSerializer
     permission_classes = [IsAuthorOrReadOnly]
 
 class UserRegister(generics.ListCreateAPIView):

@@ -1,12 +1,12 @@
 from django.urls import path, include
 
-from .views import ArticleList, ArticleDetail, UserRegister, ArticleCreate
+from .views import QuoteList, QuoteDetail, UserRegister, QuoteCreate
 
 
 urlpatterns = [
-    path('', ArticleList.as_view()),
-    path('create/', ArticleCreate.as_view()),    
-    path('<int:pk>/', ArticleDetail.as_view()),
+    path('', QuoteList.as_view()),
+    path('create/', QuoteCreate.as_view()),    
+    path('<int:pk>/', QuoteDetail.as_view()),
     path('user/reg/', UserRegister.as_view()),
     path('user/', include('rest_framework.urls')),
 ]

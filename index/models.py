@@ -21,7 +21,7 @@ class User(AbstractUser):
     REQUIRED_FIELDS = ['username']
 
     
-class Article(models.Model):
+class Quote(models.Model):
     title = models.CharField(max_length=150)
     text = models.TextField()
     author = models.ForeignKey(User, on_delete = models.CASCADE)

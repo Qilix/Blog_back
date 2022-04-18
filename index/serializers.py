@@ -2,7 +2,7 @@ from rest_framework import serializers
 
 import django.contrib.auth.password_validation as validators
 
-from .models import User, Article
+from .models import User, Quote
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -26,20 +26,20 @@ class UserSerializer(serializers.ModelSerializer):
         return user
 
 
-class ArticleSerializer(serializers.ModelSerializer):
+class QuoteSerializer(serializers.ModelSerializer):
     created_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S", required=False, read_only=True)
     updated_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S", required=False, read_only=True)
     author = serializers.SlugRelatedField(slug_field="username", read_only=True, many=False)
 
     class Meta:
-        model = Article
+        model = Quote
         exclude = ('text',)
 
-class ArticleDetailSerializer(serializers.ModelSerializer):
+class QuoteDetailSerializer(serializers.ModelSerializer):
     created_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S", required=False, read_only=True)
     updated_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S", required=False, read_only=True)
     author = serializers.SlugRelatedField(slug_field="username", read_only=True, many=False)
 
     class Meta:
-        model = Article
+        model = Quote
         fields = '__all__'
