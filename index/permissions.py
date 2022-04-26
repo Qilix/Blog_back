@@ -17,7 +17,7 @@ class IsAuthorOrReadOnly(permissions.BasePermission):
     message = "У вас нет доступа"
 
     def sub_Article(self, obj):
-        return obj.sub_only   
+        return obj.sub_only    
 
     def has_object_permission(self, request, view, obj):
         if self.sub_Article(obj) and request.user.is_authenticated and request.method in permissions.SAFE_METHODS:

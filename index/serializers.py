@@ -17,13 +17,13 @@ class UserSerializer(serializers.ModelSerializer):
         return super(UserSerializer, self).validate(data)
         
     def create(self, validated_data):
-        user = User(
-            email=validated_data['email'],
-            username=validated_data['username']
-        )
-        user.set_password(validated_data['password'])   
-        user.save()
-        return user
+            user = User(
+                email=validated_data['email'],
+                username=validated_data['username']
+            )
+            user.set_password(validated_data['password'])   
+            user.save()
+            return user
 
 
 class ArticleSerializer(serializers.ModelSerializer):

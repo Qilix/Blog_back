@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ao7azc(jgv71d2o8rdlx-m-9n(rdz8#il2@m4hz2tc=k#0t279'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'rest_framework',
 
     'index',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -83,16 +84,18 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+
 DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'dhrtrno2e2mtj',
-            'USER': 'rsiexznfakapno',
-            'PASSWORD':'a1231932c5f670cb191f96b7e6268f0ffa9fef66430e45ef67033d7636d07a19',
-            'HOST': 'ec2-52-30-67-143.eu-west-1.compute.amazonaws.com',
+            'NAME': 'test',
+            'USER': 'postgres',
+            'PASSWORD':'1224',
+            'HOST': 'localhost',
             'PORT': 5432,
         }
     }
+
 
 
 # Password validation
@@ -131,7 +134,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-# STATIC_URL = 'static/'
+STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -140,6 +143,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
