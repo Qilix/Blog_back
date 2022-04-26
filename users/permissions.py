@@ -1,5 +1,5 @@
 from rest_framework.permissions import BasePermission
-from .models import User
+from ..index.models import User
 from rest_framework import permissions
 
 # Проверка прав на создание

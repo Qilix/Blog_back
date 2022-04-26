@@ -1,14 +1,14 @@
 from rest_framework import generics
 from rest_framework.authentication import BasicAuthentication
 
-from .permissions import IsAuthorOrReadOnly, AuthorRole
-from .models import Article, User
-from .serializers import ArticleSerializer, UserSerializer, ArticleDetailSerializer
+from ..users.permissions import IsAuthorOrReadOnly, AuthorRole
+from .models import Article
+from .serializers import ListArticlesSerializer, ArticleSerializer
 
 
 class ArticleCreate(generics.CreateAPIView):
     queryset = Article.objects.all()
-    serializer_class = ArticleDetailSerializer
+    serializer_class = ArticleSerializer
     permission_classes = [AuthorRole]
     authentication_classes = [BasicAuthentication]
 
@@ -18,15 +18,11 @@ class ArticleCreate(generics.CreateAPIView):
 
 class ArticleList(generics.ListAPIView):
     queryset = Article.objects.all().order_by('-created_at')
-    serializer_class = ArticleSerializer
+    serializer_class = ListArticlesSerializer
 
 
 class ArticleDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Article.objects.all()
-    serializer_class = ArticleDetailSerializer
+    serializer_class = ArticleSerializer
     authentication_classes = [BasicAuthentication]
     permission_classes = [IsAuthorOrReadOnly]
-
-class UserRegister(generics.ListCreateAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
