@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'rest_framework',
 
     'index',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -83,27 +84,17 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+
 DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'd7vgg9lh9jq67e',
-            'USER': 'eqajtvllegkvfi',
-            'PASSWORD':'5b6be9a987e947490d02e1e557dd565b22c6bc3740480b939c2e919d826de208',
-            'HOST': 'ec2-52-212-228-71.eu-west-1.compute.amazonaws.com',
+            'NAME': 'test',
+            'USER': 'postgres',
+            'PASSWORD':'1224',
+            'HOST': 'localhost',
             'PORT': 5432,
         }
     }
-
-# DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#             'NAME': 'test',
-#             'USER': 'postgres',
-#             'PASSWORD':'1224',
-#             'HOST': 'localhost',
-#             'PORT': 5432,
-#         }
-#     }
 
 
 
