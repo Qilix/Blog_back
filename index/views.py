@@ -26,7 +26,6 @@ class ArticleDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ArticleDetailSerializer
     authentication_classes = [BasicAuthentication]
     permission_classes = [IsAuthorOrReadOnly]
-        
 
 class UserRegister(generics.ListCreateAPIView):
     queryset = User.objects.all()
