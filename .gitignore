@@ -1,5 +1,6 @@
 backend/__pycache__
 index/migrations
+users/migrations
 index/__pycache__
 
 venv/
