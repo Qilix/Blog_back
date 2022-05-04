@@ -1,9 +1,8 @@
-from rest_framework.permissions import BasePermission
 from .models import User
 from rest_framework import permissions
 
 
-class AuthorRole(BasePermission):
+class IsAuthor(permissions.BasePermission):
     message = "Вы должны быть автором"
 
     def has_permission(self,request,view):
@@ -24,3 +23,13 @@ class IsAuthorOrReadOnly(permissions.BasePermission):
         elif not self.sub_Article(obj) and request.method in permissions.SAFE_METHODS:
             return True
         return obj.author == request.user
+
+
+class IsAuthorComment(permissions.BasePermission):
+    def has_permission(self, request, view):
+        if request.method in permissions.SAFE_METHODS:
+            return True
+        return request.user and request.user.is_authenticated
+
+    def has_object_permission(self, request, view, obj):
+        return obj.user == request.user

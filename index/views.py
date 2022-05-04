@@ -1,15 +1,15 @@
 from rest_framework import generics
 from rest_framework.authentication import BasicAuthentication
 
-from users.permissions import IsAuthorOrReadOnly, AuthorRole
-from .models import Article
-from .serializers import ListArticlesSerializer, ArticleSerializer
+from users.permissions import IsAuthorOrReadOnly, IsAuthor, IsAuthorComment
+from .models import Article, Comment
+from .serializers import CommentSerializer, ListArticlesSerializer, ArticleSerializer
 
 
 class ArticleCreate(generics.CreateAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
-    permission_classes = [AuthorRole]
+    permission_classes = [IsAuthor]
     authentication_classes = [BasicAuthentication]
 
     def perform_create(self, serializer):
@@ -26,3 +26,16 @@ class ArticleDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ArticleSerializer
     authentication_classes = [BasicAuthentication]
     permission_classes = [IsAuthorOrReadOnly]
+
+
+class CommentsView(generics.CreateAPIView, generics.UpdateAPIView, generics.DestroyAPIView):
+    permission_classes = [IsAuthorComment]
+    queryset = Comment.objects.filter(deleted=False)
+    serializer_class = CommentSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+    
+    def perform_destroy(self, instance):
+        instance.deleted = True
+        instance.save()
