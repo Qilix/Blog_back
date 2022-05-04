@@ -1,7 +1,7 @@
 from rest_framework import generics
 from rest_framework.authentication import BasicAuthentication
 
-from ..users.permissions import IsAuthorOrReadOnly, AuthorRole
+from users.permissions import IsAuthorOrReadOnly, AuthorRole
 from .models import Article
 from .serializers import ListArticlesSerializer, ArticleSerializer
 

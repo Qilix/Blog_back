@@ -1,8 +1,8 @@
 from rest_framework.permissions import BasePermission
-from ..index.models import User
+from .models import User
 from rest_framework import permissions
 
-# Проверка прав на создание
+
 class AuthorRole(BasePermission):
     message = "Вы должны быть автором"
 
@@ -12,7 +12,6 @@ class AuthorRole(BasePermission):
         return True
         
 
-# Проверять права для статей "только для подписчиков"
 class IsAuthorOrReadOnly(permissions.BasePermission):
     message = "У вас нет доступа"
 
