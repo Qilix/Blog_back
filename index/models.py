@@ -15,8 +15,8 @@ class Article(models.Model):
         return self.title
 
 class Comment(models.Model):
-    article = models.ForeignKey(Article, on_delete=models.CASCADE)
-    name = models.ForeignKey(User, on_delete=models.CASCADE)
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='comment')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     body = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     deleted = models.BooleanField(default=False)
@@ -25,4 +25,4 @@ class Comment(models.Model):
         ordering = ['created_on']
 
     def __str__(self):
-        return 'Comment {} by {}'.format(self.body, self.name)
+        return '{} - {}'.format(self.body, self.user.username)
