@@ -1,6 +1,7 @@
 backend/__pycache__
 index/migrations
 index/__pycache__
+users/migrations
 
 venv/
 env/
