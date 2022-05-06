@@ -6,7 +6,7 @@ class IsAuthor(permissions.BasePermission):
     message = "Вы должны быть автором"
 
     def has_permission(self,request,view):
-        if request.user.role != User.AUT:
+        if request.user.is_authenticated and request.user.role != User.AUT:
             return False
         return True
         
