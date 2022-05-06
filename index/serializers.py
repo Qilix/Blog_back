@@ -18,14 +18,14 @@ class CommentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Comment
-        exclude = ('article',)
-        
+        fields = '__all__'
+
 
 class ArticleSerializer(serializers.ModelSerializer):
     created_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S", required=False, read_only=True)
     updated_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S", required=False, read_only=True)
     author = serializers.SlugRelatedField(slug_field="username", read_only=True, many=False)
-    comment = CommentSerializer(many=True)
+    comment = CommentSerializer(many=True, read_only=True)
 
     class Meta:
         model = Article

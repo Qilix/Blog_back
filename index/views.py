@@ -30,12 +30,8 @@ class ArticleDetail(generics.RetrieveUpdateDestroyAPIView):
 
 class CommentsView(generics.CreateAPIView, generics.UpdateAPIView, generics.DestroyAPIView):
     permission_classes = [IsAuthorComment]
-    queryset = Comment.objects.filter(deleted=False)
+    queryset = Comment.objects.all()
     serializer_class = CommentSerializer
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
-    
-    def perform_destroy(self, instance):
-        instance.deleted = True
-        instance.save()
