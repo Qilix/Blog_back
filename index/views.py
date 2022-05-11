@@ -1,15 +1,15 @@
 from rest_framework import generics
 from rest_framework.authentication import BasicAuthentication
 
-from .permissions import IsAuthorOrReadOnly, AuthorRole
-from .models import Article, User
-from .serializers import ArticleSerializer, UserSerializer, ArticleDetailSerializer
+from users.permissions import IsAuthorOrReadOnly, IsAuthor, IsAuthorComment
+from .models import Article, Comment
+from .serializers import CommentSerializer, ListArticlesSerializer, ArticleSerializer
 
 
 class ArticleCreate(generics.CreateAPIView):
     queryset = Article.objects.all()
-    serializer_class = ArticleDetailSerializer
-    permission_classes = [AuthorRole]
+    serializer_class = ArticleSerializer
+    permission_classes = [IsAuthor]
     authentication_classes = [BasicAuthentication]
 
     def perform_create(self, serializer):
@@ -18,15 +18,20 @@ class ArticleCreate(generics.CreateAPIView):
 
 class ArticleList(generics.ListAPIView):
     queryset = Article.objects.all().order_by('-created_at')
-    serializer_class = ArticleSerializer
+    serializer_class = ListArticlesSerializer
 
 
 class ArticleDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Article.objects.all()
-    serializer_class = ArticleDetailSerializer
+    serializer_class = ArticleSerializer
     authentication_classes = [BasicAuthentication]
     permission_classes = [IsAuthorOrReadOnly]
 
-class UserRegister(generics.ListCreateAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+
+class CommentsView(generics.CreateAPIView, generics.UpdateAPIView, generics.DestroyAPIView):
+    permission_classes = [IsAuthorComment]
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)

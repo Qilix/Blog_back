@@ -1,32 +1,9 @@
 from rest_framework import serializers
 
-import django.contrib.auth.password_validation as validators
-
-from .models import User, Article
+from .models import Article, Comment
 
 
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ('id','email', 'username', 'password')
-
-    def validate(self, data):
-        user = User(**data)
-        password = data.get('password')
-        validators.validate_password(password=password, user=user)
-        return super(UserSerializer, self).validate(data)
-        
-    def create(self, validated_data):
-            user = User(
-                email=validated_data['email'],
-                username=validated_data['username']
-            )
-            user.set_password(validated_data['password'])   
-            user.save()
-            return user
-
-
-class ArticleSerializer(serializers.ModelSerializer):
+class ListArticlesSerializer(serializers.ModelSerializer):
     created_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S", required=False, read_only=True)
     updated_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S", required=False, read_only=True)
     author = serializers.SlugRelatedField(slug_field="username", read_only=True, many=False)
@@ -35,10 +12,20 @@ class ArticleSerializer(serializers.ModelSerializer):
         model = Article
         exclude = ('text',)
 
-class ArticleDetailSerializer(serializers.ModelSerializer):
+
+class CommentSerializer(serializers.ModelSerializer):
+    user = serializers.SlugRelatedField(read_only=True, slug_field='username')
+
+    class Meta:
+        model = Comment
+        fields = '__all__'
+
+
+class ArticleSerializer(serializers.ModelSerializer):
     created_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S", required=False, read_only=True)
     updated_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S", required=False, read_only=True)
     author = serializers.SlugRelatedField(slug_field="username", read_only=True, many=False)
+    comment = CommentSerializer(many=True, read_only=True)
 
     class Meta:
         model = Article
