@@ -4,6 +4,7 @@ from rest_framework.authentication import BasicAuthentication
 from users.permissions import IsAuthorOrReadOnly, IsAuthor, IsAuthorComment
 from .models import Article, Comment
 from .serializers import CommentSerializer, ListArticlesSerializer, ArticleSerializer
+from rest_framework.pagination import PageNumberPagination
 
 
 class ArticleCreate(generics.CreateAPIView):
@@ -15,11 +16,14 @@ class ArticleCreate(generics.CreateAPIView):
     def perform_create(self, serializer):
 	    serializer.save(author=self.request.user)
 
+class ArticlePagination(PageNumberPagination):
+    page_size = 3
+
 
 class ArticleList(generics.ListAPIView):
     queryset = Article.objects.all().order_by('-created_at')
     serializer_class = ListArticlesSerializer
-
+    pagination_class = ArticlePagination
 
 class ArticleDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Article.objects.all()

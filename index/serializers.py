@@ -7,6 +7,11 @@ class ListArticlesSerializer(serializers.ModelSerializer):
     created_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S", required=False, read_only=True)
     updated_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S", required=False, read_only=True)
     author = serializers.SlugRelatedField(slug_field="username", read_only=True, many=False)
+    description = serializers.SerializerMethodField('set_description')
+
+    def set_description(self, article):
+        desc = getattr(article, 'text')
+        return desc[:100] + str('...')
 
     class Meta:
         model = Article
